@@ -91,7 +91,13 @@ app.get("/:id", function(req, res) {
 //   });
 // });
 
-var server = app.listen(8080, function() {
-  var host = server.address().address;
-  var port = server.address().port;
+// var server = app.listen(8080, function() {
+//   var host = server.address().address;
+//   var port = server.address().port;
+// });
+
+const PORT = process.env.PORT || 9090;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on PORT ${PORT}`);
 });
