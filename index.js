@@ -83,13 +83,13 @@ app.get("/tr/:id", function(req, res) {
   readLogs(req.params.id);
 });
 
-// app.get('/', function (req, res) {
-//   var fs = require('fs');
-//   fs.readFile('image.jpeg',function(err,data){
-//     res.writeHead('200', {'Content-Type': 'image/png'});
-//     res.end(data,'binary');
-//   });
-// });
+app.get("/", function(req, res) {
+  var fs = require("fs");
+  fs.readFile("image.jpeg", function(err, data) {
+    res.writeHead("200", { "Content-Type": "image/png" });
+    res.end(data, "binary");
+  });
+});
 
 // var server = app.listen(8080, function() {
 //   var host = server.address().address;
