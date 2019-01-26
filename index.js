@@ -5,7 +5,7 @@ var app = express();
 let logs = [];
 
 const readLogs = id => {
-  fs.readFile("logs.json", function read(err, data) {
+  fs.readFile("log.json", function read(err, data) {
     if (err) {
       throw err;
     }
@@ -24,7 +24,7 @@ const savelogs = id => {
 
   logs.push(report);
 
-  fs.writeFile("logs.json", JSON.stringify(logs), function(err) {
+  fs.writeFile("log.json", JSON.stringify(logs), function(err) {
     if (err) {
       return console.log(err);
     }
@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get("/:id", function(req, res) {
+app.get("/tr/:id", function(req, res) {
   var buf = new Buffer([
     0x47,
     0x49,

@@ -4,7 +4,7 @@
 /node_modules
 
 #logs
-/logs.json
+/log.json
 
 # testing
 # /coverage
