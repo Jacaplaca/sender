@@ -4,7 +4,7 @@ var app = express();
 
 let logs = [];
 
-const readLogs = id => {
+const readLogs = url => {
   fs.readFile("log.json", function read(err, data) {
     if (err) {
       throw err;
@@ -12,15 +12,27 @@ const readLogs = id => {
     logs = JSON.parse(data);
 
     // Invoke the next step here however you like
-    savelogs(id); // Or put the next step in a function and invoke it
+    savelogs(url); // Or put the next step in a function and invoke it
   });
 };
 
-const savelogs = id => {
+const savelogs = url => {
+  const utmsString = url.slice(4);
+  const utms = utmsString.split("&");
+  console.log(utms);
+  console.log(url);
   const report = {
-    opener: id,
+    // opener: id,
     time: new Date()
   };
+
+  utms.map(utm => {
+    const key = utm.split("=")[0];
+    const value = utm.split("=")[1];
+    report[key] = value;
+  });
+
+  // console.log(report);
 
   logs.push(report);
 
@@ -39,7 +51,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get("/tr/:id", function(req, res) {
+app.get("/tr/", function(req, res) {
   var buf = new Buffer([
     0x47,
     0x49,
@@ -78,12 +90,13 @@ app.get("/tr/:id", function(req, res) {
     0x3b
   ]);
   res.writeHead("200", { "Content-Type": "image/png" });
-  console.log("req.param", req.params.id);
+  // console.log("req.param", req.params.id);
   res.end(buf, "binary");
-  readLogs(req.params.id);
+  readLogs(req.url);
 });
 
 app.get("/", function(req, res) {
+  console.log(req.url);
   var fs = require("fs");
   fs.readFile("image.jpeg", function(err, data) {
     res.writeHead("200", { "Content-Type": "image/png" });
