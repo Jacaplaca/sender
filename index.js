@@ -1,8 +1,10 @@
 var express = require("express");
+require("dotenv").config();
 const fs = require("fs");
 var app = express();
 
 let logs = [];
+const loc = process.env.LOCALIZATION;
 
 const readLogs = url => {
   fs.readFile("log.json", function read(err, data) {
@@ -17,13 +19,14 @@ const readLogs = url => {
 };
 
 const savelogs = url => {
+  // const cut = loc === "dev" ? 4 : 5;
   const utmsString = url.slice(4);
   const utms = utmsString.split("&");
   console.log(utms);
   console.log(url);
   const report = {
     // opener: id,
-    time: new Date()
+    timeOpen: new Date()
   };
 
   utms.map(utm => {
