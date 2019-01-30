@@ -1,6 +1,13 @@
-var express = require("express");
+const express = require("express");
 require("dotenv").config();
+const fetchlogs = require("./fetchlogs");
 const fs = require("fs");
+var schedule = require("node-schedule");
+
+var j = schedule.scheduleJob("4 40 * * *", function() {
+  console.log(`Fetching logs! ${new Date()}`);
+  fetchlogs.connection();
+});
 var app = express();
 
 let logs = [];
@@ -115,5 +122,5 @@ app.get("/", function(req, res) {
 const PORT = process.env.PORT || 9090;
 
 app.listen(PORT, () => {
-  console.log(`Server is running on PORT ${PORT}`);
+  console.log(`Its ${new Date()} Server is running on PORT ${PORT}`);
 });

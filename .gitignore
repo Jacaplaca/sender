@@ -7,6 +7,8 @@
 /log.json
 /sf.txt
 /logctr.json
+/logs
+/all.json
 
 # testing
 # /coverage

@@ -1,16 +1,8 @@
 const fs = require("fs");
 
-let content;
+let content = [];
 let lines = [];
-let goodLogs = [
-  {
-    ip: "178.42.124.137",
-    time: "28/Jan/2019:17:20:09 +0100",
-    who: "testowanie@adresemail.pl",
-    comp: "jakas",
-    data: "160119"
-  }
-];
+let goodLogs = [];
 // First I want to read the file
 fs.readFile("./sf.txt", "utf8", function read(err, data) {
   if (err) {
@@ -59,10 +51,10 @@ const clean = lines => {
 
 const makeObj = line => {
   let utmsObj = {};
-  const timeReg = /\[(.*?)\]/g;
-  const time = timeReg.exec(line)[1];
-  //const timeReg = /\[([^\)]+)\]/g;
-  //const time = line.match(timeReg);
+  const whenReg = /\[(.*?)\]/g;
+  const when = whenReg.exec(line)[1];
+  //const whenReg = /\[([^\)]+)\]/g;
+  //const when = line.match(whenReg);
   const ipReg = /\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/g;
   const ip = line.match(ipReg);
   const whoReg = /\GET \/\?([^\)]+) HT/g;
@@ -79,7 +71,7 @@ const makeObj = line => {
     });
 
     // const comp = compReg.exec(line)[1];
-    const newLine = Object.assign({ ip: ip[0], time, ...utmsObj });
+    const newLine = Object.assign({ ip: ip[0], when, ...utmsObj });
     lines.push(newLine);
     // console.log(found);
   }
