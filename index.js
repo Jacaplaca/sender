@@ -1,12 +1,12 @@
 const express = require("express");
 require("dotenv").config();
-const fetchlogs = require("./fetchlogs");
+const fetchurl = require("./fetchurl");
 const fs = require("fs");
 var schedule = require("node-schedule");
 
-var j = schedule.scheduleJob("4 40 * * *", function() {
+var j = schedule.scheduleJob("*/15 * * * *", function() {
   console.log(`Fetching logs! ${new Date()}`);
-  fetchlogs.connection();
+  fetchurl.fetching();
 });
 var app = express();
 
