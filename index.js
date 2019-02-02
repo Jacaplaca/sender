@@ -114,9 +114,9 @@ app.get("/", function(req, res) {
   });
 });
 
-app.get("/logo.gif", function(req, res) {
+app.get("/logo1.gif", function(req, res) {
   console.log(req.url);
-  fs.readFile("logo.gif", function(err, data) {
+  fs.readFile("logo1.gif", function(err, data) {
     res.writeHead("200", { "Content-Type": "image/gif" });
     res.end(data, "binary");
   });
