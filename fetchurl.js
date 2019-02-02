@@ -26,7 +26,7 @@ var options = {
   }
 };
 exports.fetching = function() {
-  console.log(`${username}   ${password}`);
+  // console.log(`${username}   ${password}`);
   fetchuj();
 };
 

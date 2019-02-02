@@ -4,7 +4,7 @@ const fetchurl = require("./fetchurl");
 const fs = require("fs");
 var schedule = require("node-schedule");
 
-var j = schedule.scheduleJob("*/5 * * * *", function() {
+var j = schedule.scheduleJob("* */24 * * *", function() {
   console.log(`Fetching logs! ${new Date()}`);
   fetchurl.fetching();
 });
