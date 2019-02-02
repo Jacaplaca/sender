@@ -25,8 +25,12 @@ var options = {
     Authorization: "Basic " + base64.encode(username + ":" + password)
   }
 };
-
 exports.fetching = function() {
+  console.log(`${username}   ${password}`);
+  fetchuj();
+};
+
+const fetchuj = () => {
   console.log("fetching");
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
@@ -36,6 +40,7 @@ exports.fetching = function() {
   });
 };
 
+// fetchuj();
 const onlyWithString = body => {
   body
     .toString()
