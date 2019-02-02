@@ -116,7 +116,10 @@ app.get("/", function(req, res) {
 
 app.get("/logo.gif", function(req, res) {
   console.log(req.url);
-  res.end(buf, "binary");
+  fs.readFile("logo.gif", function(err, data) {
+    res.writeHead("200", { "Content-Type": "image/gif" });
+    res.end(data, "binary");
+  });
   readLogs(req.url);
 });
 
