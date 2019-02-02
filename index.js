@@ -102,7 +102,7 @@ app.get("/tr/", function(req, res) {
   res.writeHead("200", { "Content-Type": "image/png" });
   // console.log("req.param", req.params.id);
   res.end(buf, "binary");
-  readLogs(req.url);
+  // readLogs(req.url);
 });
 
 app.get("/", function(req, res) {
@@ -112,6 +112,12 @@ app.get("/", function(req, res) {
     res.writeHead("200", { "Content-Type": "image/png" });
     res.end(data, "binary");
   });
+});
+
+app.get("/logo.gif", function(req, res) {
+  console.log(req.url);
+  res.end(buf, "binary");
+  readLogs(req.url);
 });
 
 // var server = app.listen(8080, function() {
